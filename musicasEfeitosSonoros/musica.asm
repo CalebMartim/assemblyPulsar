@@ -1,14 +1,14 @@
 addi a7, zero, 31 ## Syscall de tocar instrumentos ao mesmo tempo
 
 addi a0, x0, 62 ## D
-addi a1, zero, 2000 ## DuraÁ„o: 2 segundos 
+addi a1, zero, 2000 ## Dura√ß√£o: 2 segundos 
 addi a2, zero, 0 ## Piano 
 addi a3, zero, 127 ## Volume 
 
 ecall
 
 addi a0, x0, 1000 ###
-addi a7, zero, 32 ### Esperar 1 segundo antes da prÛxima nota
+addi a7, zero, 32 ### Esperar 1 segundo antes da pr√≥xima nota
 ecall
 
 addi a0, x0, 63 ###   
@@ -16,10 +16,10 @@ addi a7, zero, 31 ### Tocar D#
 ecall
 
 addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais dois segundos 
+addi a7, zero, 32 ## Esperar mais um segundo 
 ecall
 
-## PERCURS„O 
+## PERCURS√£O 
 addi a0, x0, 62 ## D
 addi a2, zero, 115
 addi a7, zero, 31
@@ -28,11 +28,11 @@ addi a3, zero, 100 ## Volume
 ecall
 
 addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais dois segundos 
+addi a7, zero, 32 ## Esperar um segundo 
 ecall
 
 addi a3, zero, 127 ## Volume 
-addi a1, zero, 2000 ## DuraÁ„o dois segundos
+addi a1, zero, 2000 ## Dura√ß√£o dois segundos
 addi a2, x0, 0 ## Piano
 addi a0, x0, 62
 addi a7, zero, 31 ## Tocar D 
@@ -47,10 +47,10 @@ addi a7, zero, 31 ### D#
 ecall
 
 addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais dois segundos 
+addi a7, zero, 32 ## Esperar mais um segundo 
 ecall
 
-## PERCURS„O 
+## PERCURS√£O 
 addi a0, x0, 62 ## D
 addi a2, zero, 115
 addi a7, zero, 31
@@ -59,11 +59,11 @@ addi a3, zero, 100 ## Volume
 ecall
 
 addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais dois segundos 
+addi a7, zero, 32 ## Esperar mais um segundo 
 ecall
 
 addi a3, zero, 127 ## Volume 
-addi a1, zero, 2000 ## DuraÁ„o dois segundos
+addi a1, zero, 2000 ## Dura√ß√£o dois segundos
 addi a2, x0, 0 ## Piano
 addi a0, x0, 62
 addi a7, zero, 31 ### D 
@@ -78,10 +78,10 @@ addi a7, zero, 31  ### D#
 ecall
 
 addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais dois segundos 
+addi a7, zero, 32 ## Esperar mais um segundo
 ecall
 
-## PERCURS„O 
+## PERCURS√£O 
 addi a0, x0, 62 ## D
 addi a2, zero, 115
 addi a7, zero, 31
@@ -90,11 +90,11 @@ addi a3, zero, 100 ## Volume
 ecall
 
 addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais dois segundos 
+addi a7, zero, 32 ## Esperar mais um segundo
 ecall
 
 addi a3, zero, 127 ## Volume 
-addi a1, zero, 2000 ## DuraÁ„o dois segundos
+addi a1, zero, 2000 ## Dura√ß√£o dois segundos
 addi a2, x0, 0 ## Piano
 
 addi a0, x0, 62
