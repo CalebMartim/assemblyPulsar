@@ -1,110 +1,92 @@
-addi a7, zero, 31 ## Syscall de tocar instrumentos ao mesmo tempo
+##########################
+# a0: nota               #
+# a1: duração            #
+# a2: instrumento        #
+# a3: volume             # 
+##########################
 
+.macro percursao
+addi a7, zero, 31 ## Tocar instrumento
 addi a0, x0, 62 ## D
-addi a1, zero, 2000 ## Duração: 2 segundos 
-addi a2, zero, 0 ## Piano 
-addi a3, zero, 127 ## Volume 
-
-ecall
-
-addi a0, x0, 1000 ###
-addi a7, zero, 32 ### Esperar 1 segundo antes da próxima nota
-ecall
-
-addi a0, x0, 63 ###   
-addi a7, zero, 31 ### Tocar D# 
-ecall
-
-addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais um segundo 
-ecall
-
-## PERCURSãO 
-addi a0, x0, 62 ## D
-addi a2, zero, 115
-addi a7, zero, 31
-addi a1, zero, 1000
+addi a1, zero, 1000 ## Um segundo
+addi a2, zero, 115 ## Percursão
 addi a3, zero, 100 ## Volume 
 ecall
+.end_macro
 
-addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar um segundo 
+.macro pause
+addi a7, zero, 32  
+addi a0, x0, 1000 ## Esperar 1 segundo antes da próxima nota
 ecall
+.end_macro
 
-addi a3, zero, 127 ## Volume 
-addi a1, zero, 2000 ## Duração dois segundos
-addi a2, x0, 0 ## Piano
-addi a0, x0, 62
-addi a7, zero, 31 ## Tocar D 
-ecall
+.text
+MAIN:	addi a7, zero, 31 ## Syscall de tocar instrumentos ao mesmo tempo
+	addi a0, x0, 62 ## D
+	addi a1, zero, 2000 ## Duração: 2 segundos 
+	addi a2, zero, 0 ## Piano 
+	addi a3, zero, 127 ## Volume 
+	ecall
 
-addi a0, x0, 1000
-addi a7, zero, 32 
-ecall
+	pause
 
-addi a0, x0, 63
-addi a7, zero, 31 ### D# 
-ecall
+	addi a7, zero, 31 ## Tocar D# 
+	addi a0, x0, 63    
+	ecall
 
-addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais um segundo 
-ecall
+	pause
 
-## PERCURSãO 
-addi a0, x0, 62 ## D
-addi a2, zero, 115
-addi a7, zero, 31
-addi a1, zero, 1000
-addi a3, zero, 100 ## Volume 
-ecall
+	percursao
 
-addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais um segundo 
-ecall
+	pause
 
-addi a3, zero, 127 ## Volume 
-addi a1, zero, 2000 ## Duração dois segundos
-addi a2, x0, 0 ## Piano
-addi a0, x0, 62
-addi a7, zero, 31 ### D 
-ecall
+	addi a7, zero, 31 
+	addi a0, x0, 62 ## D
+	addi a1, zero, 2000 ## Duração dois segundos
+	addi a2, x0, 0 ## Piano
+	addi a3, zero, 127 ## Volume 
+	ecall
 
-addi a0, x0, 1000
-addi a7, zero, 32
-ecall
+	pause
 
-addi a0, x0, 63
-addi a7, zero, 31  ### D# 
-ecall
+	addi a7, zero, 31 ## Tocar D#
+	addi a0, x0, 63
+	ecall
 
-addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais um segundo
-ecall
+	pause
 
-## PERCURSãO 
-addi a0, x0, 62 ## D
-addi a2, zero, 115
-addi a7, zero, 31
-addi a1, zero, 1000
-addi a3, zero, 100 ## Volume 
-ecall
+	percursao
 
-addi a0, x0, 1000
-addi a7, zero, 32 ## Esperar mais um segundo
-ecall
+	pause
 
-addi a3, zero, 127 ## Volume 
-addi a1, zero, 2000 ## Duração dois segundos
-addi a2, x0, 0 ## Piano
+	addi a7, zero, 31 
+	addi a0, x0, 62 ## D 
+	addi a1, zero, 2000 ## Duração dois segundos
+	addi a2, x0, 0 ## Piano
+	addi a3, zero, 127 ## Volume 
+	ecall
 
-addi a0, x0, 62
-addi a7, zero, 31 ### D
-ecall
+	pause
 
-addi a0, x0, 1000
-addi a7, zero, 32
-ecall
+	addi a7, zero, 31 ## Tocar D#
+	addi a0, x0, 63
+	ecall
 
-addi a0, x0, 51
-addi a7, zero, 31 
-ecall
+	pause 
+
+	percursao
+
+	pause
+
+	addi a7, zero, 31  
+	addi a0, x0, 62 ## D
+	addi a1, zero, 2000 ## Por dois segundos
+	addi a2, x0, 0 ## Piano
+	addi a3, zero, 127 ## Volume 127
+	ecall
+
+	pause
+
+	addi a7, zero, 31 
+	addi a0, x0, 51 ## Tocar D# uma oitava a baixo
+	ecall
