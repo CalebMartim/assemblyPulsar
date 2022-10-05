@@ -48,3 +48,7 @@ MAIN:	li a7, 31
 	ecall
 	li a0, 63
 	ecall
+	
+	pause
+	
+	
