@@ -62,7 +62,7 @@ Pela apresentação do projeto acontecer no mês de outubro, nomeamos nosso jogo
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1.3]{banner}
-\caption{Banner do jogo pulsar editado para a nossa versão do jogo}
+\caption{Banner do jogo Pulsar editado para a nossa versão do jogo}
 \end{figure}
 
 \section{Metodologia}
@@ -87,7 +87,7 @@ Usamos de auxílio tutoriais de piano disponibilizados no YouTube para que pudé
 Quanto aos efeitos sonoros foi preciso apenas usar o syscall 31 do RARS, onde no registrador a2 é guardado um valor intermediário específico entre 120 à 127. Pois estes são os valores dedicados aos próprios efeitos sonoros que o RARS possui.
 
 \subsection{Arte visual}
-Seguindo a temática de Halloween, decidimos em utilizar uma paleta de cores de tons escuros para denotar o aspecto misterioso e assustador proporcionado pela data comemorativa. Ela foi utilizada na elaboração do mapa da casa assombrada que o jogador deverá escapar. A tela inicial do jogo, por exemplo, é composta por vários tons de marrom para simbolizar o material em que a casa foi construido, no caso madeira, além de trazer a ideia de um local escuro e abandonado.
+Seguindo a temática de Halloween, decidimos utilizar uma paleta de cores de tons escuros para denotar o aspecto misterioso e assustador proporcionado pela data comemorativa. Ela foi utilizada na elaboração do mapa da casa assombrada que o jogador deverá escapar. A tela inicial do jogo, por exemplo, é composta por vários tons de marrom para simbolizar o material em que a casa foi construída, no caso madeira, além de trazer a ideia de um local escuro e abandonado.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{tela_inicio}
@@ -96,9 +96,20 @@ Seguindo a temática de Halloween, decidimos em utilizar uma paleta de cores de 
 
 Os desenhos dos inimigos foram inspirados por animais comumente encontrados em locais escuros e que as pessoas têm medo. Tendo isso em vista, escolhemos o rato e morcego para implementarmos no jogo.
 O personagem controlado pelo jogador é baseado na clássica cartoonização de um fantasma, um pano branco com dois olhos pretos.
-[Imagem com o fantasma]
-Sabendo que a utilização de cheats na apresentação foi aconselhada, desenhamos um novo desing para o jogador que, ao estar sob efeito do cheat, ele mudaria a cor de seu pano branco para um azul escuro, fazendo assim uma referência ao modo de como os fantasmas do jogo arcade japonês "Pac-Man" (1980) ficavam quando o jogador coletava uma "power pellets" no video-game.
-[Imagem do fantasma cheatado ao lado do fantasma do Pac-Man]
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{fantasma}
+\caption{Sprite do fantasma}
+\end{figure}  
+
+Sabendo que a utilização de cheats na apresentação foi aconselhada, desenhamos um novo desing para o jogador que, ao estar sob efeito do cheat, mudaria a cor de seu pano branco para um azul escuro, fazendo assim uma referência ao modo de como os fantasmas do jogo arcade japonês "Pac-Man" (1980)\textsuperscript{\cite{b6}} ficavam quando o jogador coletava uma "power pellets" no video-game.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{fantasma_cheat}
+\includegraphics[scale=0.7]{fantasma_pacman}
+\caption{Sprite do fantasma}
+\end{figure}  
 
 Para os tiros, pensamos do fantasma atirar ectoplasma como seu ataque contra os inimigos do mapa. O personagem "Geleia" do filme "Os Caça-Fantasmas" de 1984 foi grande parte da inspiração do desing do projétil.
 
@@ -130,7 +141,7 @@ A base utilizada para o desenvolvimento das mecânica que foram utilizadas no jo
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.3]{diagrama}
+\includegraphics[scale=0.2]{diagrama}
 \caption{Diagrama da estrutura do nosso jogo}
 \end{figure}
 
@@ -156,25 +167,15 @@ Além disso, o mesmo método foi usado para determinar a colisão de tiros com i
   A movimentação do personagem, dos inimigos e dos tiros e a limpeza de rastros foram baseados em labels que continham  os valores da posição anterior e atual dos alvos da análise. As labels contém os valores X e Y de cada objeto que se move no jogo, os quais podem ser acessados por outras partes do código, possibilitando o uso dessas informações não só para a movimentação do personagem como também para a limpeza de rastros e o funcionamento do sistema de colisões.
   
 \subsubsection{Inteligência dos inimigos} 
-  A inteligência dos inimigos criados para o jogo
-\begin{itemize}
-  \item O rato
-  
+A inteligência dos inimigos criados para o jogo foi baseada no sistema de colisão, no sistema de movimentação do personagem e no sistema de tiros. Por meio da junção desses sistemas foi possível criar uma imagem que se move em uma direção determinada e troca seu curso baseado nas colisões que sofre.
+
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.7]{rato_movimento}
 \caption{Ilustração de movimento do inimigo rato}
 \end{figure}  
-  
-  \item O morcego
-  
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.7]{morcego_perseguicao}
-\caption{Ilustração de movimento do inimigo morcego}
-\end{figure}  
 
-\end{itemize}
+o movimento dos ratos é em um único eixo, podendo ser para direita ou para esquerda. Esse mesmo conceito foi utilizado para os demais inimigos empregados no jogo.
  
 \subsubsection{Sistema de chaves}  
 O sistema de chaves e portas foi feito com o uso de...
@@ -216,6 +217,8 @@ Tendo em vista os pontos observados
 \bibitem{b4} \url{https://youtu.be/hZY5DBmgC_A}
 
 \bibitem{b5} \url{https://pt.wikipedia.org/wiki/Sprite_(computa%C3%A7%C3%A3o_gr%C3%A1fica)}
+
+\bibitem{b6} \url{https://pt.wikipedia.org/wiki/Pac-Man}
 
 \end{thebibliography}
 \vspace{12pt}
