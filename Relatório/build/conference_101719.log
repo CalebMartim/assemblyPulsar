@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.10.5)  6 OCT 2022 00:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.10.5)  9 OCT 2022 20:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -464,150 +464,24 @@ Package hyperref Info: Link coloring OFF on input line 16.
 (C:\Users\leb\Desktop\Leb\UnB\Introdução A Sistemas Computacionais\assemblyPu
 lsar\Relatório\build\conference_101719.out)
 (C:\Users\leb\Desktop\Leb\UnB\Introdução A Sistemas Computacionais\assemblyPu
-lsar\Relatório\build\conference_101719.out)
-\@outlinefile=\write3
-\openout3 = `conference_101719.out'.
+lsar\Relatório\build\conference_101719.out
+! I can't write on file `conference_101719.pdf'.
+(Press Enter to retry, or Control-C to exit; default file extension is `.pdf')
+Please type another file name for output
+! Emergency stop.
+\Hy@OutlineName ...utline goto name{#2}count#3{#4}
+                                                  
+l.1 ...000r\000o\000d\000u\000\347\000\343\000o}{}
+                                                  % 1
+*** (job aborted, file error in nonstop mode)
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
-
-
-(C:\Users\leb\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
-
-
-(C:\Users\leb\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<./imagens//banner.png, id=49, 144.54pt x 35.8941pt>
-File: ./imagens//banner.png Graphic file (type png)
-<use ./imagens//banner.png>
-Package pdftex.def Info: ./imagens//banner.png  used on input line 64.
-(pdftex.def)             Requested size: 187.90195pt x 46.6623pt.
-<./imagens//codigo_de_musica.png, id=53, 471.7625pt x 865.2325pt>
-File: ./imagens//codigo_de_musica.png Graphic file (type png)
-<use ./imagens//codigo_de_musica.png>
-Package pdftex.def Info: ./imagens//codigo_de_musica.png  used on input line 81
-.
-(pdftex.def)             Requested size: 141.52983pt x 259.57175pt.
-<./imagens//tela_inicio.png, id=54, 240.9pt x 180.675pt>
-File: ./imagens//tela_inicio.png Graphic file (type png)
-<use ./imagens//tela_inicio.png>
-Package pdftex.def Info: ./imagens//tela_inicio.png  used on input line 93.
-(pdftex.def)             Requested size: 168.62883pt x 126.47162pt.
-
-[1{C:/Users/leb/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
-
-
- <./imagens//banner.png> <./imagens//codigo_de_musica.png>]
-<./imagens//fantasma.png, id=72, 96.36pt x 96.36pt>
-File: ./imagens//fantasma.png Graphic file (type png)
-<use ./imagens//fantasma.png>
-Package pdftex.def Info: ./imagens//fantasma.png  used on input line 102.
-(pdftex.def)             Requested size: 67.45152pt x 67.45152pt.
-<./imagens//fantasma_cheat.png, id=74, 96.36pt x 96.36pt>
-File: ./imagens//fantasma_cheat.png Graphic file (type png)
-<use ./imagens//fantasma_cheat.png>
-Package pdftex.def Info: ./imagens//fantasma_cheat.png  used on input line 109.
-
-(pdftex.def)             Requested size: 67.45152pt x 67.45152pt.
-<./imagens//fantasma_pacman.png, id=75, 96.36pt x 96.36pt>
-File: ./imagens//fantasma_pacman.png Graphic file (type png)
-<use ./imagens//fantasma_pacman.png>
-Package pdftex.def Info: ./imagens//fantasma_pacman.png  used on input line 110
-.
-(pdftex.def)             Requested size: 67.45152pt x 67.45152pt.
-<./imagens//ectoplasma_modelo.png, id=76, 96.36pt x 96.36pt>
-File: ./imagens//ectoplasma_modelo.png Graphic file (type png)
-<use ./imagens//ectoplasma_modelo.png>
-Package pdftex.def Info: ./imagens//ectoplasma_modelo.png  used on input line 1
-18.
-(pdftex.def)             Requested size: 28.9082pt x 28.9082pt.
-<./imagens//fonte.png, id=77, 488.82625pt x 562.1pt>
-File: ./imagens//fonte.png Graphic file (type png)
-<use ./imagens//fonte.png>
-Package pdftex.def Info: ./imagens//fonte.png  used on input line 126.
-(pdftex.def)             Requested size: 146.649pt x 168.6313pt.
-<./imagens//mapa_fase_1.png, id=78, 240.9pt x 180.675pt>
-File: ./imagens//mapa_fase_1.png Graphic file (type png)
-<use ./imagens//mapa_fase_1.png>
-Package pdftex.def Info: ./imagens//mapa_fase_1.png  used on input line 134.
-(pdftex.def)             Requested size: 216.80798pt x 162.60599pt.
-<./imagens//diagrama.png, id=79, 963.6pt x 542.025pt>
-File: ./imagens//diagrama.png Graphic file (type png)
-<use ./imagens//diagrama.png>
-Package pdftex.def Info: ./imagens//diagrama.png  used on input line 144.
-(pdftex.def)             Requested size: 192.71658pt x 108.40308pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2 <./imagens//tela_inicio.png> <./imagens//fantasma.png> <./imagens//fantasma_
-cheat.png> <./imagens//fantasma_pacman.png> <./imagens//ectoplasma_modelo.png> 
-<./imagens//fonte.png (PNG copy)> <./imagens//mapa_fase_1.png>]
-<./imagens//sistema_de_colisao.png, id=91, 225.84375pt x 150.5625pt>
-File: ./imagens//sistema_de_colisao.png Graphic file (type png)
-<use ./imagens//sistema_de_colisao.png>
-Package pdftex.def Info: ./imagens//sistema_de_colisao.png  used on input line 
-159.
-(pdftex.def)             Requested size: 158.08954pt x 105.39302pt.
-<./imagens//rato_movimento.png, id=92, 301.125pt x 150.5625pt>
-File: ./imagens//rato_movimento.png Graphic file (type png)
-<use ./imagens//rato_movimento.png>
-Package pdftex.def Info: ./imagens//rato_movimento.png  used on input line 174.
-
-(pdftex.def)             Requested size: 210.78606pt x 105.39302pt.
-<./imagens//chave_e_porta.png, id=93, 225.84375pt x 129.48375pt>
-File: ./imagens//chave_e_porta.png Graphic file (type png)
-<use ./imagens//chave_e_porta.png>
-Package pdftex.def Info: ./imagens//chave_e_porta.png  used on input line 185.
-(pdftex.def)             Requested size: 225.84319pt x 129.48341pt.
- [3 <./imagens//diagrama.png> <./imagens//sistema_de_colisao.png> <./imagens//r
-ato_movimento.png> <./imagens//chave_e_porta.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 219--220
-[][]$\OT1/ptm/m/n/8 https : / / pt . wikipedia . org / wiki / Sprite[](computa 
-% C3 % A7 % C3 % A3o[]gr %
- []
-
-
-** Conference Paper **
-Before submitting the final camera ready copy, remember to:
-
- 1. Manually equalize the lengths of two columns on the last page
- of your paper;
-
- 2. Ensure that any PostScript and/or PDF output post-processing
- uses only Type 1 fonts and that every step in the generation
- process uses the appropriate paper size.
-
-[4
-
-] (conference_101719.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package rerunfilecheck Info: File `conference_101719.out' has not changed.
-(rerunfilecheck)             Checksum: 0258A755E3A9B2C3D57E7D27DE588D43;1692.
- ) 
+ 
 Here is how much of TeX's memory you used:
- 11242 strings out of 478338
- 181090 string characters out of 2837644
- 498122 words of memory out of 3000000
- 29485 multiletter control sequences out of 15000+600000
- 508181 words of font info for 106 fonts, out of 8000000 for 9000
+ 10954 strings out of 478338
+ 175188 string characters out of 2837644
+ 468411 words of memory out of 3000000
+ 29273 multiletter control sequences out of 15000+600000
+ 490329 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,11n,77p,533b,465s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Users/leb/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/U
-sers/leb/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Use
-rs/leb/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/User
-s/leb/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/
-leb/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "C:\Users\leb\Desktop\Leb\UnB\Introdução A Sistemas Computa
-cionais\assemblyPulsar\Relatório\build\conference_101719.pdf" (4 pages, 405999
- bytes).
-PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
- 35 named destinations out of 1000 (max. 500000)
- 154 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 72i,1n,77p,306b,152s stack positions out of 10000i,1000n,20000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
