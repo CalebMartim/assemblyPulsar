@@ -1,0 +1,87 @@
+# Possui 21 notas
+.data
+Comandos: 
+.byte 31, 32, 31, 32, 31, 32, 31, 32, 31, 32, 31, 32, 31, 32, 31, 32, 31, 32, 31, 32, 31
+
+Notas: 
+.byte 62, 62, 31, 31, 62, 62, 62, 62, 63, 63, 62, 62, 62, 62, 63, 63, 62, 62, 62, 62, 51
+
+Duracoes: 
+.half 2000, 1000, 1000, 1000, 1000, 1000, 2000, 1000, 1000, 1000, 1000, 1000, 2000, 1000, 1000, 1000, 1000, 1000, 2000, 1000, 1000
+
+Instrumentos: 
+.byte 0, 0, 0, 0, 115, 115, 0, 0, 0, 0, 115, 115, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+Volumes: 
+.byte 127, 127, 127, 127, 100, 100, 127, 127, 127, 127, 100, 100, 127, 127, 127, 127, 115, 115, 127, 127, 127
+
+#Determina o tempo de espera para a próxima nota
+Pausa:			.word 0
+
+.macro Musica
+la t0, Pausa
+lw t1, 0(t0)
+bnez t1, FimMusica
+
+la t0, Comandos
+add t0, t0, s5
+lb a7, 0(t0)
+li t1, 32
+beq a7, t1, Sleep	# Verifica se a proxima ação é um sleep
+
+la t0, Notas
+add t0, t0, s5
+lb a0, 0(t0)
+
+la t0, Duracoes
+mv t1,s5
+li t2, 2 
+mul t1, t1, t2
+add t0, t0, t1
+lh a1, 0(t0)
+
+la t0, Instrumentos
+add t0, t0, s5
+lb a2, 0(t0)
+
+la t0, Volumes
+add t0, t0, s5
+lb a3, 0(t0)
+	
+ecall			# Toca a nota
+addi s5, s5, 1
+j FimMusica
+Sleep:
+la t0, Duracoes
+mv t1,s5
+li t2, 2 
+mul t1, t1, t2
+add t0, t0, t1
+lh t1, 0(t0)
+div t1, t1, t2
+la t0, Pausa
+sw t1, 0(t0)		# Salva na Label Pausa o tempo de espera
+
+#la t0, Duracoes
+#mv t1,s5
+#li t2, 2 
+#mul t1, t1, t2
+#add t0, t0, t1
+#lh a0, 0(t0)	# Salva na Label Pausa o tempo de espera
+#li a7, 32
+#ecall
+
+addi s5, s5, 1
+FimMusica:
+li t0, 20
+bne s5, t0, Continuar
+	mv s5, zero
+Continuar:
+
+la t0, Pausa
+lw t1, 0 (t0)
+beqz t1, Continuar2
+	addi t1, t1, -1
+	sw t1, 0(t0)
+Continuar2:
+.end_macro

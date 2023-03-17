@@ -1,0 +1,15 @@
+comando: .word 21
+.byte: 31
+
+nota: .word 21
+.byte: 72
+
+duracao: .word 21
+.byte: 800
+
+instrumento: .word 21
+.byte: 126
+
+volume: .word 21
+.byte: 100
+

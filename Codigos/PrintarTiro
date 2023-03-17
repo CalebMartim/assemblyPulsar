@@ -1,0 +1,31 @@
+.macro PrintarTiro
+beq s2, zero, Done3		# Verifica se tem um tiro a ser printado, se s2 == 0, não tem tiro.
+	li t0, 5
+	bne s4, t0, Done2
+		mv s4, zero
+		Tiro()
+		beqz t6, Proximo
+			la t0, PTMAnterior
+			GanhoouPerda(t6)
+		Proximo:
+		Apagar(PTMAnterior, Tile)
+	Done2:
+	la t0, PTMAtual		# Carrega em t0 o endereco da Label PTMAtual
+	lh a1,0(t0)		# Carrega a posicao X do Tiro em a1
+	lh a2,2(t0)		# Carrega a posicao Y do Tiro em a2
+	printRegistradores(Ectoplasma, a1, a2, a3)
+	xori a3,a3,1
+	printRegistradores(Ectoplasma, a1, a2, a3)
+	
+	
+############################
+Done3:				# Verifica se o tiro colidiu e precisa ser apagado
+li t0,4
+bne s3, t0, Done4
+li s3,0
+li t0, 1
+Apagar(PTMAnterior, Tile)
+Apagar(PTMAtual, Tile)
+
+Done4:
+.end_macro

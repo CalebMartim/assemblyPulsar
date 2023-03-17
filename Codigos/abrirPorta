@@ -1,0 +1,46 @@
+.macro abrirPorta
+li t0, 1			#Abre a porta amarela
+bne t1, t0, Proximo1
+SomChave
+print(Tile, 264, 192, 0)
+print(Tile, 264, 192, 1)
+print(Tile, 272, 192, 0)
+print(Tile, 272, 192, 1)
+la t0, Pontuacao
+lw t1, 0(t0)
+addi t1, t1, 20
+sw t1, 0(t0)
+Proximo1:
+li t0, 2			#Abre a porta Ciano
+bne t1, t0, Proximo2	
+SomChave	
+print(Tile, 264, 184, 0)
+print(Tile, 264, 184, 1)
+print(Tile, 272, 184, 0)
+print(Tile, 272, 184, 1)
+la t0, Pontuacao
+lw t1, 0(t0)
+addi t1, t1, 100
+sw t1, 0(t0)
+Proximo2:
+li t0, 3			#Passa de fase
+bne t1, t0, Proximo3
+SomPorta
+la t0, FaseAtual
+lw t1, 0(t0)
+li t2, 1
+bne t1, t2, Proximo4
+Fase2
+li t2, 2
+la t0, FaseAtual
+sw t2, 0(t0)
+li t6, 2
+Proximo4:
+li t2, 2
+bne t1, t2, Proximo3
+li t2, 1
+la t0, FaseAtual
+sw t2, 0(t0)
+TeladeVitoria
+Proximo3:
+.end_macro

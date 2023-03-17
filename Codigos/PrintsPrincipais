@@ -1,0 +1,36 @@
+.macro PrintsPrincipais
+##############################
+#
+PrintaMorcego(MorcegoPIAtual1, MorcegoPIAnterior1, Controle1)
+PrintaMorcego(MorcegoPIAtual2, MorcegoPIAnterior2, Controle2)
+PrintaMorcego(MorcegoPIAtual3, MorcegoPIAnterior3, Controle3)
+PrintaRato(RatoPIAtual1, RatoPIAnterior1, Controle4)
+PrintaRato(RatoPIAtual2, RatoPIAnterior2, Controle5)
+PrintaRato(RatoPIAtual3, RatoPIAnterior3, Controle6)
+##############################
+#Parte do código responsável por printar o personagem		
+la t0, PosicaoAtual	# Carrega em t0 o endereco da Label PosicaoAtual
+		
+lh a1,0(t0)		# Carrega a posicao X do personagem em a1
+lh a2,2(t0)		# Carrega a posicao Y do personagem em a2
+mv a3, s0		# Frame atual
+
+# a5 determina qual personagem usar
+# zero é o personagem olhando para a direita(1)
+li t0, 1 #Personagem no cheat
+li t1, 2 #Personagem olhando para a esquerda(2)
+
+beq a5, zero, Sprite3
+beq a5, t0, Sprite2
+beq a5, t1, Sprite1
+Sprite1: printRegistradores(Fantasma2, a1, a2, a3)		# Imprime o Personagem 2
+j Done
+Sprite2: printRegistradores(FantasmaCheat, a1, a2, a3)	# Imprime o Peronagem Cheat
+j Done
+Sprite3: printRegistradores(Fantasma1, a1, a2, a3)		# Imprime o Personagem 1
+
+Done: 
+##############################
+# Parte do código responsável por printar o tiro do personagem
+PrintarTiro
+.end_macro

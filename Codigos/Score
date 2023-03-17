@@ -1,0 +1,13 @@
+.macro Score
+la t0, Pontuacao
+lw t1, 0(t0)
+li t2, 10
+rem t3,t1,t2
+PrintNumeros(t3,88,216)
+div t1,t1,t2
+rem t3,t1,t2
+PrintNumeros(t3,72,216)
+div t1,t1,t2
+rem t3,t1,t2
+PrintNumeros(t3,56,216)
+.end_macro

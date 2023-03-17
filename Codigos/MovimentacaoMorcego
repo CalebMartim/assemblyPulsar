@@ -1,0 +1,89 @@
+.macro MovimentacaoMorcego(%PosicaoAtual, %PosicaoAnterior, %Controle)
+#Verifica se o Morcego está vivo
+la t0,%PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+lw t1,0(t0)
+beqz t1, Colidir
+
+#Verifica se algum Morcego foi morto
+la t0, PosicaoColisao
+lw t2,0(t0)
+beqz t2, Continuar
+bne t1, t2,Continuar		#Verifica se a posição do Morcego é a mesma do impacto
+la t0,ZerarPosicao
+lw t1,0(t0)
+la t0,%PosicaoAtual
+sw t1,0(t0)
+la t0,%PosicaoAnterior
+sw t1,0(t0)
+la t0, PosicaoColisao
+sw t1, 0(t0)
+j Colidir
+
+Continuar:
+la t0,%PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+la t1,%PosicaoAnterior		# Carrega em t1 o endereco de PosicaoAnterior
+lw t2,0(t0)
+sw t2,0(t1)			# Salva a posicao atual do personagem em PosicaoAnterior
+la t0, InimigoMovendo
+sw t2, 0(t0)			# Salava a posição para comparação
+
+
+la t3, %Controle
+lw t4,0(t3)
+beqz t4, SegundaParte
+
+#Vai para cima até encontrar uma parede
+la t0,%PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+lh t1,2(t0)			# Carrega o Y atual do personagem
+li t3, -8
+add t1,t1,t3			# Decrementa 8 pixeis
+ColisaoInimigo(0)
+la t0,%PosicaoAtual		
+lh t1,2(t0)			# Carrega o Y atual do personagem
+la t3, InimigoMovendo
+lh t2,2(t3)			# Carrega o Y atual do personagem
+bne t1,t2,Final			# Igual, parede em cima
+la t3, %Controle
+li t4, 0
+sw t4,0(t3)
+la t0,%PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+lh t1,2(t0)			# Carrega o Y atual do personagem
+li t3, 8
+add t1,t1,t3			# Incrementa 8 pixeis
+ColisaoInimigo(1)
+j Final
+
+#Faz o personagem descer
+SegundaParte:
+la t0,%PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+lh t1,2(t0)			# Carrega o Y atual do personagem
+li t3, 8
+add t1,t1,t3			# Incrementa 8 pixeis
+ColisaoInimigo(1)
+la t0,%PosicaoAtual		
+lh t1,2(t0)			# Carrega o Y atual do personagem
+la t3, InimigoMovendo
+lh t2,2(t3)			# Carrega o Y atual do personagem
+bne t1,t2,Final			# Igual, parede em cima
+la t3, %Controle
+li t4, 1
+sw t4,0(t3)
+la t0,%PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+lh t1,2(t0)			# Carrega o Y atual do personagem
+li t3, -8
+add t1,t1,t3			# Decrementa 8 pixeis
+ColisaoInimigo(0)
+j Final
+
+Colidir:
+li t0, 1
+Final:
+# O valor de t6 nesse ponto determina o tipo de dano sofrido durante o movimento
+beqz t6, Proximo1
+	la t0,%PosicaoAtual
+	GanhoouPerda(t6)
+	la t1,ZerarPosicao
+	lw t2,0(t1)
+	sw t2,0(t0)
+Proximo1:
+.end_macro

@@ -1,0 +1,92 @@
+############################################################
+# a0 = Endereço da Memória
+# t0 = Endereço da Posição atual do personagem (Vem de outra parte do Código)
+# t1 = Chave coletada
+# t2 = X
+# t3 = Y
+# t4 = Variável de verificação(É um tiro) 
+# t5 = Variável temporária
+# t6 = Variável temporária
+############################################################
+.macro ColisaoChave(%Direcao)
+# A direção pode assumir 4 valores
+# 0 = Cima	1 = Baixo
+# 2 = Direita	3 = Esquerda
+li a0,0xFF0		# Carrega 0xFF0 (Endereço da memória) em a0
+add a0,a0,a3		# Adiciona o frame ao FF0 (se o frame for 1 vira FF1, se for 0 fica FF0)
+slli a0,a0,20		# Adiciona 20 0 na esquerda = 0xFF100000 ou 0xFF000000
+
+lh t2,0(t0)		# X
+lh t3,2(t0)		# Y
+
+add a0,a0,t2		# Adiciona x ao a0
+		
+li t5,320		# t5 = 320
+mul t5,t5,t3		# t5 = 320 * y
+add a0,a0,t5		# Adiciona t5 ao a0
+
+li t5, %Direcao
+li t6, 0
+beq t5,t6, Cima
+li t6, 1
+beq t5,t6, Baixo
+li t6, 2
+beq t5,t6, Direita
+li t6, 3
+beq t5,t6, Esquerda
+j FIM
+
+Cima:
+	li t5, 320
+	li t6, 0x0000037
+	sub a0, a0, t5			#Endereço do Pixel em cima do Personagem
+	lb a0, 0(a0)			
+	beq a0, t6, FIM1
+	li t6, 0xfffffffc
+	beq a0, t6, FIM2
+	li t6, 0x0000050
+	beq a0, t6, FIM3
+
+j FIM
+Baixo:
+	li t5, 320
+	li t6, 8
+	mul t5, t5, t6
+	li t6, 0x0000037
+	add a0, a0, t5		#Endereço do Pixel em baixo do Personagem
+	lb a0, 0(a0)
+	beq a0, t6, FIM1
+	li t6, 0xfffffffc
+	beq a0, t6, FIM2
+	li t6, 0x0000050
+	beq a0, t6, FIM3
+
+j FIM
+Direita:
+	li t5, 8
+	li t6, 0x0000037
+	add a0, a0, t5		#Endereço do Pixel na direita do Personagem
+	lb a0, 0(a0)
+	beq a0, t6, FIM1
+	li t6, 0xfffffffc
+	beq a0, t6, FIM2
+
+
+j FIM
+Esquerda:
+	li t5, 1
+	li t6, 0x0000037
+	sub a0, a0, t5		#Endereço do Pixel na esquerda do Personagem
+	lb a0, 0(a0)
+	beq a0, t6, FIM1
+	li t6, 0xfffffffc
+	beq a0, t6, FIM2
+
+j FIM
+FIM1: li t1,1		# Chave Amarela 
+j FIM
+FIM2: li t1,2		# Chave Ciano
+j FIM
+FIM3: li t1,3		# Saída
+FIM:
+.end_macro

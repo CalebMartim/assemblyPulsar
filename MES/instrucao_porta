@@ -1,0 +1,9 @@
+.macro SomPorta
+li a0, 72
+li a1, 2000
+li a2, 125
+li a3, 100
+li a7, 31
+ecall
+.end_macro
+

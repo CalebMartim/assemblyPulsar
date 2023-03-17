@@ -1,0 +1,52 @@
+############################################################
+# t0 = Variável temporária
+# t1 = Variável temporária // Valor atual do eixo X ou Y
+# t2 = Variável temporária
+# t3 = Variável temporária
+# t4 = 
+############################################################
+.macro Tiro()
+la t0,PTMAtual				# Carrega em t0 o endereco de PTMAtual
+la t1,PTMAnterior			# Carrega em t1 o endereco de PTMAnterior
+lw t2,0(t0)
+sw t2,0(t1)				# Salva a posicao atual do tiro em PTMAnterior
+#li t4, %quanto
+li t3,0
+beq s3,t3,Cima				# Direciona o tiro para cima
+
+li t3,1
+beq s3,t3,Baixo				# Direciona o tiro para baixo
+		
+li t3,2
+beq s3,t3,Direita			# Direciona o tiro para direita
+		
+li t3,3
+beq s3,t3,Esquerda			# Direciona o tiro para esquerda
+
+Cima: lh t1,2(t0)			# Carrega o Y atual do Tiro
+	li t3, -8
+	add t1,t1,t3			# Decrementa 1 pixeis
+	Colisao(0,0)
+	
+j FINAL
+Baixo: lh t1,2(t0)			# Carrega o Y atual do Tiro
+	li t3, 8
+	add t1,t1,t3			# Incrementa 1 pixeis
+	Colisao(1,0)
+	
+j FINAL
+	
+Direita: lh t1,0(t0)			# Carrega o X atual do Tiro
+	li t3, 8
+	add t1,t1,t3			# Incrementa 1 pixeis
+	Colisao(2,0)
+	
+j FINAL
+
+Esquerda: lh t1,0(t0)			# Carrega o X atual do Tiro
+	li t3, -8
+	add t1,t1,t3			# Decrementa 1 pixeis
+	Colisao(3,0)
+
+FINAL:
+.end_macro
