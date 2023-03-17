@@ -1,0 +1,149 @@
+############################################################
+# t0 = Endereçõ do KGDMMIO / Valor da tecla para verificação
+# t1 = Verifica se tem Tecla pressionada
+# t2 = Qual a Tecla pressioanda
+############################################################
+.macro Tecla
+li t0,0xFF200000		# Carrega o endereco de controle do KDMMIO
+lw t1,0(t0)			# Le bit de Controle Teclado
+andi t1,t1,0x0001		# Mascara o bit menos significativo
+beq t1,zero,FIM   	   	# Se nao ha tecla pressionada entao vai para FIM
+lw t2,4(t0)  			# Le o valor da tecla
+
+li t0,'c'
+beq t2,t0,Cheat			# se tecla pressionada for 'c', chama Cheat
+
+li t0,'w'
+beq t2,t0,CHAR_CIMA		# se tecla pressionada for 'w', chama CHAR_CIMA
+		
+li t0,'a'
+beq t2,t0,CHAR_ESQ		# se tecla pressionada for 'a', chama CHAR_ESQ
+		
+li t0,'s'
+beq t2,t0,CHAR_BAIXO		# se tecla pressionada for 's', chama CHAR_BAIXO
+		
+li t0,'d'
+beq t2,t0,CHAR_DIR		# se tecla pressionada for 'd', chama CHAR_DIR
+
+li t0,'f'
+beq t2,t0,ATIRAR		# se tecla pressionada for 'f', chama ATIRAR
+
+li t0,'n'
+beq t2,t0,TrocarFase		# se tecla pressionada for 'n', chama TrocarFase
+
+li t0,'e'
+beq t2,t0,Exit			# se tecla pressionada for 'e', chama Exit
+
+j FIM
+
+############################################################
+# t0 = Endereçõ da Posição Atual do personagem.
+# t1 = Endereçõ da Posição Anterior do personagem / Valor do X ou Y do Personagem.
+# t2 = Salva o valor da Posição Atual na Posição Anterior / Controle do limite do mapa.
+# t3 = Variavel responsável por fazer o cheat pular as paredes
+############################################################
+
+CHAR_CIMA:	
+la t0,PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+la t1,PosicaoAnterior		# Carrega em t1 o endereco de PosicaoAnterior
+lw t2,0(t0)
+sw t2,0(t1)			# Salva a posicao atual do personagem em PosicaoAnterior
+						
+lh t1,2(t0)			# Carrega o Y atual do personagem
+beq zero, t1, FIM		# Não atravessa borda
+	li t3, -8
+	add t1,t1,t3		# Decrementa 8 pixeis
+	Colisao(0,0)
+	li t3, -8
+	li t2, 1
+	beq a5,t2, FIM3		#Verifica se o cheat está ativo
+j FIM
+
+CHAR_BAIXO:	
+la t0,PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+la t1,PosicaoAnterior		# Carrega em t1 o endereco de PosicaoAnterior
+lw t2,0(t0)
+sw t2,0(t1)			# salva a posicao atual do personagem em PosicaoAnterior
+								
+lh t1,2(t0)			# Carrega o Y atual do personagem
+li t2, 232			# Posição limite para o personagem
+beq t2, t1, FIM			# Não atravessa borda
+	li t3, 8
+	add t1,t1,t3		# Incrementa 8 pixeis
+	Colisao(1,0)
+	li t2, 1
+	li t3, 8
+	beq a5,t2, FIM3		#Verifica se o cheat está ativo
+j FIM
+
+CHAR_DIR:	
+la t0,PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+la t1,PosicaoAnterior		# Carrega em t1 o endereco de PosicaoAnterior
+lw t2,0(t0)
+sw t2,0(t1)			# Salva a posicao atual do personagem em PosicaoAnterior
+				
+lh t1,0(t0)			# Carrega o X atual do personagem
+li t2, 312			# Posição limite para o personagem
+beq t2, t1, FIM			# Não atravessa borda
+	li t3, 8
+	add t1,t1,t3		# incrementa 8 pixeis
+	Colisao(2,0)
+	li t3, 8
+	li t2, 1
+	beq a5,t2, FIM2
+	mv a5, zero
+j FIM
+
+CHAR_ESQ:	
+la t0,PosicaoAtual		# Carrega em t0 o endereco de PosicaoAtual
+la t1,PosicaoAnterior		# Carrega em t1 o endereco de PosicaoAnterior
+lw t2,0(t0)
+sw t2,0(t1)			# Salva a posicao atual do personagem em PosicaoAnterior
+		
+lh t1,0(t0)			# Carrega o X atual do personagem
+beq zero, t1, FIM		# Não atravaessa borda
+	li t3, -8
+	add t1,t1,t3		# Decrementa 8 pixeis
+	Colisao(3,0)
+	li t2, 1
+	li t3, -8
+	beq a5,t2, FIM2
+	li a5, 2
+j FIM
+
+ATIRAR:
+bnez s2, FIM  
+	Tiro()
+	li s2, 1
+j FIM
+
+Cheat: 
+	li t2, 1
+	beq a5,t2, Final
+	mv a5, zero
+Final: xori a5, a5, 1
+j FIM
+
+TrocarFase:
+
+j FIM
+
+Exit:
+Derrota
+exit
+j FIM
+
+FIM2: 
+lh t2,0(t0)
+beq t2,t1, FIM
+add t1, t1, t3
+sh t1,0(t0)
+j FIM
+FIM3:  
+lh t2,2(t0)
+beq t2,t1, FIM
+add t1, t1, t3
+sh t1,2(t0)
+
+FIM:
+.end_macro

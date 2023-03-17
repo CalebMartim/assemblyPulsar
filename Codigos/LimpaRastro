@@ -1,0 +1,27 @@
+#####################################
+# Limpeza do "rastro" do personagem #
+#####################################
+.macro LimparRastro(%PosicaoAnterior, %Fundo)
+la t0, %PosicaoAnterior		# Carrega em t0 o endereco de PosicaoAnterior
+		
+la a0, %Fundo			# Carrega o endereco do Fundo em a0
+lh a1,0(t0)			# Carrega a posicao x antiga do personagem em a1
+lh a2,2(t0)			# Carrega a posicao y antiga do personagem em a2
+
+mv a3,s0			# Carrega o frame atual (que esta na tela em a3)
+xori a3,a3,1			# Inverte a3 (0 vira 1, 1 vira 0)
+printRegistradores(%Fundo, a1, a2, a3)	# Imprime
+.end_macro
+
+.macro Apagar(%PosicaoAnterior, %Fundo)
+la t0, %PosicaoAnterior		# Carrega em t0 o endereco de PosicaoAnterior
+		
+la a0, %Fundo			# Carrega o endereco do Fundo em a0
+lh a1,0(t0)			# Carrega a posicao x antiga do personagem em a1
+lh a2,2(t0)			# Carrega a posicao y antiga do personagem em a2
+
+mv a3,s0			# Carrega o frame atual (que esta na tela em a3)
+printRegistradores(%Fundo, a1, a2, a3)	# Imprime
+xori a3,a3,1			# Inverte a3 (0 vira 1, 1 vira 0)
+printRegistradores(%Fundo, a1, a2, a3)	# Imprime
+.end_macro

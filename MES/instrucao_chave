@@ -1,0 +1,9 @@
+.macro SomChave
+li a0, 72
+li a1, 800
+li a2, 123
+li a3, 100
+li a7, 31
+ecall
+.end_macro
+

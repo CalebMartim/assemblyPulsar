@@ -1,0 +1,243 @@
+.macro exit
+li a7, 10
+ecall
+.end_macro
+###########################################################################################
+.data
+.include "Artes\num_0.data"
+.include "Artes\num_1.data"
+.include "Artes\num_2.data"
+.include "Artes\num_3.data"
+.include "Artes\num_4.data"
+.include "Artes\num_5.data"
+.include "Artes\num_6.data"
+.include "Artes\num_7.data"
+.include "Artes\num_8.data"
+.include "Artes\num_9.data"
+
+.include "Artes\mapa.data"
+.include "Artes\Tela.data"
+.include "Artes\tela_inicio_titulo.data"
+.include "Artes\tela_prox_fase.data"
+.include "Artes\tela_preta.data"
+.include "Artes\tela_morte.data"
+.include "Artes\tela_final.data"
+
+.include "Artes\combustivel_unidade_tempo.data"
+.include "Artes\combustivel_unidade_tempo_preto.data"
+
+.include "Artes\mapa_1_combustivel.data"	# Mapa da primeira fase com tudo
+.include "Artes\mapa_labirinto_1.data"		# Fase 1 
+.include "Artes\mapa_labirinto_2.data"		# Fase 2
+
+.include "Artes\fantasma.data"
+.include "Artes\fantasma_cheat.data"
+.include "Artes\tile.data"
+.include "Artes\ectoplasma.data"
+.include "Artes\rato_claro.data"
+.include "Artes\morcego_1_claro.data"
+.include "Artes\morcego_2_claro.data"
+
+.include "Artes\chave.data"
+.include "Artes\chave_2.data"
+.include "Artes\porta.data"
+.include "Artes\porta_2.data"
+
+.include "Codigos\TrocasdeTelas"
+
+.include "Codigos\PersonagensTesteJogo1"
+.include "Codigos\Prints"
+.include "Codigos\Teclas"
+.include "Codigos\LimpaRastro"
+.include "Codigos\Colisao"
+.include "Codigos\GanhoouPerda"
+.include "Codigos\MudaCombustivel"
+.include "Codigos\ColisaoCima"
+.include "Codigos\ColisaoInimigo"
+.include "Codigos\abrirPorta"
+
+.include "Codigos\PrintsPrincipais"
+.include "Codigos\PrintarTiro"
+.include "Codigos\Tiro"
+.include "Codigos\PrintaRato"
+.include "Codigos\MovimentacaoRato"
+.include "Codigos\PrintaMorcego"
+.include "Codigos\MovimentacaoMorcego"
+
+.include "Codigos\Score"
+.include "Codigos\PrintNumeros"
+
+.include "MES\derrota.asm"
+.include "MES\MusicaPrincipal"
+.include "MES\instrucao_tiros"
+.include "MES\MusicaInicial"
+.include "MES\MusicaVitoria"
+.include "MES\instrucao_chave"
+.include "MES\instrucao_porta"
+
+#Endereços para Jumps
+
+EnderecoLoopPrincipal: 		.word 0x00400394
+EnderecoRetorno: 		.word 0x00401f94
+EnderecoPrints:			.word 0x004028b8
+
+#Indicador de combustivel
+IC:			.half 316, 8  	# x, y 
+
+ZerarPosicao: 		.half 0,0
+
+PosicaoAtual:		.half 264,40	# x, y
+PosicaoAnterior:	.half 264,40	# x, y
+
+#PTM = Posição do Tiro em movimento
+PTMAtual:		.half 264,40	# x, y
+PTMAnterior:		.half 264,40	# x, y
+
+#PI = Posição Inimigo
+
+MorcegoPIAtual1:		.half 80,80	# x, y
+MorcegoPIAnterior1:		.half 80,80	# x, y
+Controle1:			.word 0
+
+MorcegoPIAtual2:		.half 48,144	# x, y
+MorcegoPIAnterior2:		.half 48,144	# x, y
+Controle2:			.word 1
+
+MorcegoPIAtual3:		.half 296,80	# x, y
+MorcegoPIAnterior3:		.half 296,80	# x, y
+Controle3:			.word 0
+
+
+RatoPIAtual1:			.half 72, 184	# x, y
+RatoPIAnterior1:		.half 72, 184	# x, y
+Controle4:			.word 0
+
+RatoPIAtual2:			.half 104, 152	# x, y
+RatoPIAnterior2:		.half 104, 152	# x, y
+Controle5:			.word 1
+
+RatoPIAtual3:			.half 72, 104	# x, y
+RatoPIAnterior3:		.half 72, 104	# x, y
+Controle6:			.word 0
+
+
+
+Colisao:			.word 0  	#Dano
+PosicaoColisao:			.half 0,0	# x, y do dano
+Derrota: 			.word 0 	#Derrota um inimigo(Ganho)
+
+InimigoMovendo:			.half 0, 0 	# x, y
+#Deixa salvo a pontuação do personagem
+Pontuacao: 			.word 0
+
+FaseAtual:			.word 1
+
+
+###########################################################################################
+# (0,32) Posição do pixel para colocar a fase nova
+# Colisão com parede: 0xC7
+# Colisão com inimigo/personagem: 2
+# Manter a5 sempre para decidir qual personagem usar
+# Manter s0 sempre para decidir qual o frame atual
+# Manter s1 sempre para controlar qual imagem usar para os inimigos.
+# 0 = Imagem 1		1 = Imagem 2
+# Manter s2 sempre para saber se pode ou não atirar.
+# 0  = Pode atirar	1 = Não pode atirar
+# Manter s3 sempre para saber a direção do tiro.
+# 0 = Cima 	1 = Baixo
+# 2 = Direita	3 = Esquerda
+# 4 = Indica limpar o tiro que colidiu.
+# Manter o s4 sempre para controlar o movimento dos objetos (Inimigos e tiros no jogo)
+# Contagem de 0 a 10
+# Manter s5 para controlar as músicas do jogo (Não está em uso)
+# Conta de 0 a 20
+# Manter s5 para controlar as músicas do jogo
+# Conta de 0 a 50
+
+
+.text
+#TelaInicial
+#Aqui estará desenhado a tela de início e todos os seus elementos
+
+SETUP:	# Desenha o "Personagem" e o "Mapa" nos dois frames
+	TelaInicial
+	mv s4, zero
+	mv a5, zero
+	Reset
+	#la a0, LoopPrincipal
+	#li a7, 1
+	#ecall
+	#exit
+# t1 =  EnderecoLoopPrincipal
+li t1, 4196368
+jr t1	
+
+#TeladeMorte
+#Mostra a tela de morte e chama a fase 1 novamente, zerando tudo
+#TeladeVitoria
+#Mostra a tela de vitória
+#Retorna para a tela de início para recomeçar o jogo
+
+LoopPrincipal:
+#############################
+#   Toca a música do jogo   #
+#Musica
+#############################
+#     Atualiza o Score      #
+Score
+
+mv t6, zero
+addi s4, s4, 1		# Altera o valor de s4
+addi s5, s5, 2		# Altera o valor de s4
+Tecla			# Verifica se tem teclas precionadas.
+# O valor de t6 nesse ponto determina o tipo de dano sofrido durante o movimento
+beqz t6, Proximo
+	GanhoouPerda(t6)
+Proximo:
+
+#Parte do Código responsável por encontrar uma chave
+la t0, PosicaoAtual
+ColisaoChave(0)
+ColisaoChave(1)
+ColisaoChave(2)
+ColisaoChave(3)
+abrirPorta
+# t6 = Numero da fase
+li t0,2
+bne t6,t0,NaoMuda
+print(Num_2, 176, 216,0)
+print(Num_2, 176, 216,1)
+NaoMuda:
+# Colocar as posições das chaves para serem apagadas ao serem encontradas. Usar o Apagar
+# Colocar o código para passar de fazer se for uma saída
+
+xori s0,s0,1		# Inverte o valor frame atual (somente o registrador)
+
+# t1 =  EnderecoPrints
+#li t1, 0x004028b8
+#jr t1
+#Retorno:
+PrintsPrincipais
+
+li t0,0xFF200604	# Carrega em t0 o endereco de troca de frame
+sw s0,0(t0)
+LimparRastro(PosicaoAnterior, Tile)
+
+li t0, 5
+bne s4, t0, Done5
+	mv s4, zero
+Done5:
+
+li t0, 50
+bne s5, t0, Done6
+	mv s5, zero
+	MudaCombustivel
+Done6:
+# t1 =  EnderecoLoopPrincipal
+li t1, 4196368
+jr t1
+
+#Prints: PrintsPrincipais
+# t1 =  Enderecoretorno
+#li t1, 0x00401f94
+#jr t1

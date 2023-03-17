@@ -1,0 +1,56 @@
+.macro MudaCombustivel()
+Apagar(IC, CUTP)
+la t0, IC
+lh a1,0(t0)		# Carrega a posicao X do personagem em a1
+addi a1, a1, -4
+sh a1,0(t0)    		# Diminui o combustível
+
+la t1, Derrota
+lw t2,0(t1)
+li t3, 0
+beq t2,t3,Continua1
+Loop:
+Apagar(IC, CUT)
+la t0, IC
+lh a1,0(t0)		# Carrega a posicao X do personagem em a1
+li t1, 320
+bge a1, t1, Continua1
+addi a1, a1, 4
+sh a1,0(t0)    		# Aumenta o combustível
+la t1, Derrota
+lw t2,0(t1)
+addi t2,t2, -1
+sw t2,0(t1)
+bnez t2,Loop
+Continua1:
+
+la t1, Colisao
+lw t2,0(t1)
+li t3, 0
+beq t2,t3,Continua2
+Loop2:
+Apagar(IC, CUTP)
+la t0, IC
+lh a1,0(t0)		# Carrega a posicao X do personagem em a1
+ble a1, zero, Continua2
+addi a1, a1, -4
+sh a1,0(t0)    		# Diminui o combustível
+la t1, Colisao
+lw t2,0(t1)
+addi t2,t2, -1
+sw t2,0(t1)
+bnez t2,Loop2
+Continua2:
+
+
+li t1, -4
+bgt a1, t1, Continua
+#Reinicia a partida após ter perdido
+TeladeMorte
+Derrota 
+Reset
+
+Continua:
+
+
+.end_macro

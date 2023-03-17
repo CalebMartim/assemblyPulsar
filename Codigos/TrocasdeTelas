@@ -1,0 +1,255 @@
+.macro TelaInicial
+print(Tela_preta, 0, 0, 0)
+print(Tela_preta, 0, 0, 1)
+li t0,0xFF200604
+li t1, 0
+sw t1, 0(t0)
+print(Tela_inicio_titulo, 0, 0, 0)
+MusicaInicial
+.end_macro
+
+.macro Fase1
+print(Tela_prox_fase, 0, 32, 0)
+print(Tela_prox_fase, 0, 32, 1)
+print(Mapa_labirinto_1, 0, 32, 0)
+print(Mapa_labirinto_1, 0, 32, 1)
+print(Chave1, 16, 136, 0)
+print(Chave1, 16, 136, 1)
+la t0, FaseAtual
+li t1, 1
+sw t1, 0(t0)
+PosicaoInicial1
+.end_macro
+
+.macro Fase2
+print(Tela_prox_fase, 0, 32, 0)
+print(Tela_prox_fase, 0, 32, 1)
+print(Mapa_labirinto_2, 0, 32, 0)
+print(Mapa_labirinto_2, 0, 32, 1)
+print(Chave1, 32, 136, 0)
+print(Chave1, 32, 136, 1)
+print(Chave2, 296, 136, 0)
+print(Chave2, 296, 136, 1)
+la t0, FaseAtual
+li t1, 2
+sw t1, 0(t0)
+PosicaoInicial2
+.end_macro
+
+.macro TeladeVitoria
+print(Tela_final, 0, 0, 0)
+print(Tela_final, 0, 0, 1)
+MusicaVitoria
+la t0, FaseAtual
+li t1, 1
+sw t1, 0(t0)
+pause
+pause
+TelaInicial
+Reset
+.end_macro
+
+.macro TeladeMorte
+print(Tela_morte, 0, 32, 0)
+print(Tela_morte, 0, 32, 1)
+pause
+la t0, FaseAtual
+li t1, 1
+sw t1, 0(t0)
+.end_macro
+
+.macro Reset
+print(Tela_preta, 0, 0, 0)
+print(Tela_preta, 0, 0, 1)
+print(Mapa_1_combustivel, 0, 0, 0) 	#Tem todos os elementos da tela
+print(Mapa_1_combustivel, 0, 0, 1)
+print(Chave1, 16, 136, 0)
+print(Chave1, 16, 136, 1)
+la t0, FaseAtual
+li t1, 1
+sw t1, 0(t0)
+la t0, IC
+li t1, 316
+sh t1, 0(t0)
+li t1, 8
+sh t1, 2(t0)
+la t0, Pontuacao
+li t1, 0
+sw t1, 0(t0)
+PosicaoInicial1
+.end_macro
+
+#Posição inicial da Fase 1
+.macro PosicaoInicial1
+la t0, PosicaoAtual
+li t1, 264
+sh t1, 0(t0)
+li t1, 40
+sh t1, 2(t0)
+
+la t0, PosicaoAnterior
+li t1, 264
+sh t1, 0(t0)
+li t1, 40
+sh t1, 2(t0)
+
+la t0, MorcegoPIAtual1
+li t1, 80
+sh t1, 0(t0)
+li t1, 80
+sh t1, 2(t0)
+
+la t0, MorcegoPIAnterior1
+li t1, 80
+sh t1, 0(t0)
+li t1, 80
+sh t1, 2(t0)
+
+la t0, MorcegoPIAtual2
+li t1, 48
+sh t1, 0(t0)
+li t1, 144
+sh t1, 2(t0)
+
+la t0, MorcegoPIAnterior2
+li t1, 48
+sh t1, 0(t0)
+li t1, 144
+sh t1, 2(t0)
+
+la t0, MorcegoPIAtual3
+li t1, 296
+sh t1, 0(t0)
+li t1, 80
+sh t1, 2(t0)
+
+la t0, MorcegoPIAnterior3
+li t1, 296
+sh t1, 0(t0)
+li t1, 80
+sh t1, 2(t0)
+
+la t0, RatoPIAtual1
+li t1, 72
+sh t1, 0(t0)
+li t1, 184
+sh t1, 2(t0)
+
+la t0, RatoPIAnterior1
+li t1, 72
+sh t1, 0(t0)
+li t1, 184
+sh t1, 2(t0)
+
+la t0, RatoPIAtual2
+li t1, 104
+sh t1, 0(t0)
+li t1, 152
+sh t1, 2(t0)
+
+la t0, RatoPIAnterior2
+li t1, 104
+sh t1, 0(t0)
+li t1, 152
+sh t1, 2(t0)
+
+la t0, RatoPIAtual3
+li t1, 72
+sh t1, 0(t0)
+li t1, 104
+sh t1, 2(t0)
+
+la t0, RatoPIAnterior3
+li t1, 72
+sh t1, 0(t0)
+li t1, 104
+sh t1, 2(t0)
+.end_macro
+
+
+#Posições iniciais da segunda Fase
+.macro PosicaoInicial2
+la t0, PosicaoAtual
+li t1, 264
+sh t1, 0(t0)
+li t1, 40
+sh t1, 2(t0)
+
+la t0, PosicaoAnterior
+li t1, 264
+sh t1, 0(t0)
+li t1, 40
+sh t1, 2(t0)
+
+la t0, MorcegoPIAtual1
+li t1, 16
+sh t1, 0(t0)
+li t1, 40
+sh t1, 2(t0)
+
+la t0, MorcegoPIAnterior1
+li t1, 16
+sh t1, 0(t0)
+li t1, 40
+sh t1, 2(t0)
+
+la t0, MorcegoPIAtual2
+li t1, 80
+sh t1, 0(t0)
+li t1, 144
+sh t1, 2(t0)
+
+la t0, MorcegoPIAnterior2
+li t1, 80
+sh t1, 0(t0)
+li t1, 144
+sh t1, 2(t0)
+
+la t0, MorcegoPIAtual3
+li t1, 296
+sh t1, 0(t0)
+li t1, 80
+sh t1, 2(t0)
+
+la t0, MorcegoPIAnterior3
+li t1, 296
+sh t1, 0(t0)
+li t1, 80
+sh t1, 2(t0)
+
+la t0, RatoPIAtual1
+li t1, 160
+sh t1, 0(t0)
+li t1, 184
+sh t1, 2(t0)
+
+la t0, RatoPIAnterior1
+li t1, 160
+sh t1, 0(t0)
+li t1, 184
+sh t1, 2(t0)
+
+la t0, RatoPIAtual2
+li t1, 104
+sh t1, 0(t0)
+li t1, 152
+sh t1, 2(t0)
+
+la t0, RatoPIAnterior2
+li t1, 104
+sh t1, 0(t0)
+li t1, 152
+sh t1, 2(t0)
+
+la t0, RatoPIAtual3
+li t1, 72
+sh t1, 0(t0)
+li t1, 104
+sh t1, 2(t0)
+
+la t0, RatoPIAnterior3
+li t1, 72
+sh t1, 0(t0)
+li t1, 104
+sh t1, 2(t0)
+.end_macro

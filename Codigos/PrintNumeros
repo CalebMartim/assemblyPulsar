@@ -1,0 +1,62 @@
+# t3 = Numero a ser prinatdo(Vem de fora)
+.macro PrintNumeros(%Numero,%X,%Y)
+li t4, 0
+bne t3, t4, Continuar0
+print(Num_0, %X, %Y,0)
+print(Num_0, %X, %Y,1)
+Continuar0:
+
+li t4, 1
+bne t3, t4, Continuar1
+print(Num_1, %X, %Y,0)
+print(Num_1, %X, %Y,1)
+Continuar1:
+
+li t4, 2
+bne t3, t4, Continuar2
+print(Num_2, %X, %Y,0)
+print(Num_2, %X, %Y,1)
+Continuar2:
+
+li t4, 3
+bne t3, t4, Continuar3
+print(Num_3, %X, %Y,0)
+print(Num_3, %X, %Y,1)
+Continuar3:
+
+li t4, 4
+bne t3, t4, Continuar4
+print(Num_4, %X, %Y,0)
+print(Num_4, %X, %Y,1)
+Continuar4:
+
+li t4, 5
+bne t3, t4, Continuar5
+print(Num_5, %X, %Y,0)
+print(Num_5, %X, %Y,1)
+Continuar5:
+
+li t4, 6
+bne t3, t4, Continuar6
+print(Num_6, %X, %Y,0)
+print(Num_6, %X, %Y,1)
+Continuar6:
+
+li t4, 7
+bne t3, t4, Continuar7
+print(Num_7, %X, %Y,0)
+print(Num_7, %X, %Y,1)
+Continuar7:
+
+li t4, 8
+bne t3, t4, Continuar8
+print(Num_8, %X, %Y,0)
+print(Num_8, %X, %Y,1)
+Continuar8:
+
+li t4, 9
+bne t3, t4, Continuar9
+print(Num_9, %X, %Y,0)
+print(Num_9, %X, %Y,1)
+Continuar9:
+.end_macro

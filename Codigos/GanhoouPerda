@@ -1,0 +1,35 @@
+# t0 = Posição a ser salva na Colisão
+# t1 = Posição a ser acrescentada na Colisão
+# 1 indica que o tiro colidiu com um inimigo
+# 2 indica que o personagem colidiu com um inimigo
+.macro GanhoouPerda(%TipodeDano)
+lw t2, 0(t0)
+la t2, PosicaoColisao
+sw t1,0(t2)
+
+mv t2, %TipodeDano
+li t1, 1
+bne t2, t1, Continua
+la t3, Pontuacao
+lw t2,0(t3)
+addi t2, t2, 25		# Pontuação adquirida
+sw t2,0(t3)
+
+
+la t3, Derrota
+li t1, 5		# Numero de barras de combustível recuperadas
+sw t1,0(t3)		
+
+li s2,0
+li s3,4
+j Continua2
+
+Continua:
+li t1, 2
+bne t2, t1, Continua2
+la t3, Colisao
+li t1, 4		# Numero de barras de combustível perdidas
+sw t1,0(t3)		
+
+Continua2:
+.end_macro

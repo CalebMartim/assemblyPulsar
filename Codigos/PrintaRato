@@ -1,0 +1,17 @@
+# t0 = Inicialmente indica se deve ou não printar o rato
+.macro PrintaRato(%RatoPIAtual, %RatoPIAnterior, %Controle)
+li t0, 10
+bne s5, t0 Verificar
+MovimentacaoRato(%RatoPIAtual, %RatoPIAnterior, %Controle)
+Verificar:
+
+li t1, 1
+beq t0, t1, FIM
+la t0,%RatoPIAtual	# Carrega em t0 o endereco da Label PosicaoAtual
+lh a1,0(t0)		# Carrega a posicao X do personagem em a1
+lh a2,2(t0)		# Carrega a posicao Y do personagem em a2
+mv a3, s0		# Frame atual
+printRegistradores(Rato,a1, a2, a3)
+Apagar(%RatoPIAnterior, Tile)
+FIM:
+.end_macro
